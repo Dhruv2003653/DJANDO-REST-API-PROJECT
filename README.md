@@ -1,14 +1,14 @@
-HELLO, Project from DHRUV AHIR.
-Lets consider "INDIA" as the name of our project and "MAHA" as the name of our App.
+## HELLO, Project from DHRUV AHIR.
+## Lets consider "INDIA" as the name of our project and "MAHA" as the name of our App.
 
-##for creation of Project and App
+## for creation of Project and App
 django-admin startproject INDIA
 cd INDIA
 python manage.py startapp MAHA
 pip install djangorestframework
 
 
-##for MODELS (MAHA/models.py)
+## for MODELS (MAHA/models.py)
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -30,7 +30,7 @@ class Project(models.Model):
         return self.name
 
 
-##in order to let the project know about our app (INDIA/settings.py)
+## in order to let the project know about our app (INDIA/settings.py)
 INSTALLED_APPS = [
     ...
     'rest_framework,
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 ]
 
 
-##lets now introduce "Serializers" (MAHA/serializers.py)
+## lets now introduce "Serializers" (MAHA/serializers.py)
 from rest_framework import serializers
 from .models import Client, Project
 from django.contrib.auth.models import User
@@ -66,7 +66,7 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-##lets visit views of our project (MAHA/views.py)
+## lets visit views of our project (MAHA/views.py)
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -95,7 +95,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-##in order to avoid error we also have to make slight changes into URLS of our PROJECT as well as of APP
+## in order to avoid error we also have to make slight changes into URLS of our PROJECT as well as of APP
 ## for app (MAHA/urls.py)
 from rest_framework.routers import DefaultRouter
 from .views import ClientViewSet, ProjectViewSet
@@ -120,7 +120,7 @@ urlpatterns = [
 ]
 
 
-##to Run Migrations and Create Superuser
+## to Run Migrations and Create Superuser
 python manage.py makemigrations MAHA
 python manage.py migrate
 python manage.py createsuperuser
@@ -138,19 +138,19 @@ for client named "DHRUV"
 }
 ## for Fetching Clients
 GET /api/clients/
-##if you want to edit
+## if you want to edit
 PUT /api/clients/<id>/
-##if u want to delete
+## if u want to delete
 DELETE /api/clients/<id>/
 
-##to Add Project and Assign Users
+## to Add Project and Assign Users
 {
   "name": "Smart India Hackathon",
   "client": 1,
   "users": [1, 2]
 }
 
-##to Get Projects Assigned to Logged-in User
+## To Get Projects Assigned to Logged-in User
 GET /api/projects/my_projects/
 
 ## finally we have finished the task. 
